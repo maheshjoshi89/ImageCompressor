@@ -2,7 +2,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy project files and restore first to leverage layer caching
+# Copy solution file and restore first to leverage layer caching
+COPY ["ImageCompressor.sln", "."]
 COPY ["ImageCompressor.WebApp/ImageCompressor.WebApp.csproj", "ImageCompressor.WebApp/"]
 COPY ["ImageCompressor.Library/ImageCompressor.Library.csproj", "ImageCompressor.Library/"]
 RUN dotnet restore "ImageCompressor.WebApp/ImageCompressor.WebApp.csproj"
