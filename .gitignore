@@ -7,3 +7,6 @@
 /ImageCompressor.Library/obj
 /ImageCompressor.WebApp/bin/Debug/net9.0
 /ImageCompressor.WebApp/obj
+/.vs/ProjectEvaluation
+/ImageCompressor.Api/bin/Debug/net9.0
+/ImageCompressor.Api/obj
