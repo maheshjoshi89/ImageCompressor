@@ -11,9 +11,9 @@ namespace ImageCompressor.Api.Controllers
     {
         private readonly ImageCompressor.Library.ImageCompressor _imageCompressor;
 
-        public CompressController()
+        public CompressController(ImageCompressor.Library.ImageCompressor imageCompressor)
         {
-            _imageCompressor = new ImageCompressor.Library.ImageCompressor();
+            _imageCompressor = imageCompressor;
         }
 
         [HttpPost]

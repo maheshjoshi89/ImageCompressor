@@ -1,35 +1,45 @@
+
 @{
     ViewData["Title"] = "Image Compressor";
 }
 
-<div class="text-center">
+<div class="text-center mb-4">
     <h1 class="display-4">Image Compressor</h1>
-    <p>Compress your images to WebP or AVIF format.</p>
+    <p class="lead">Compress your images to WebP or AVIF format.</p>
 </div>
 
 <div class="row">
-    <div class="col-md-6 offset-md-3">
-        <form asp-action="Compress" method="post">
-            <div class="form-group">
-                <label for="imageUrl">Image URL</label>
-                <input type="url" class="form-control" id="imageUrl" name="imageUrl" required>
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Compress Image</h4>
             </div>
-            <div class="form-group">
-                <label for="width">Width</label>
-                <input type="number" class="form-control" id="width" name="width" value="1024" required>
+            <div class="card-body">
+                <form asp-action="Compress" method="post">
+                    <div class="form-group mb-3">
+                        <label for="imageUrl" class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="width" class="form-label">Width (pixels)</label>
+                        <input type="number" class="form-control" id="width" name="width" value="1024" min="1" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="quality" class="form-label">Quality (0-100)</label>
+                        <input type="number" class="form-control" id="quality" name="quality" value="80" min="0" max="100" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="format" class="form-label">Output Format</label>
+                        <select class="form-select" id="format" name="format">
+                            <option value="webp">WebP</option>
+                            <option value="avif">AVIF</option>
+                        </select>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Compress Image</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="quality">Quality</label>
-                <input type="number" class="form-control" id="quality" name="quality" value="80" min="0" max="100" required>
-            </div>
-            <div class="form-group">
-                <label for="format">Format</label>
-                <select class="form-control" id="format" name="format">
-                    <option value="webp">WebP</option>
-                    <option value="avif">AVIF</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Compress</button>
-        </form>
+        </div>
     </div>
 </div>

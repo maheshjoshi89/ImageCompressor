@@ -11,9 +11,9 @@ namespace ImageCompressor.Library
     {
         private readonly HttpClient _httpClient;
 
-        public ImageCompressor()
+        public ImageCompressor(HttpClient httpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
         }
 
         public async Task<byte[]> CompressImageAsync(string imageUrl, int width, int quality, string format)

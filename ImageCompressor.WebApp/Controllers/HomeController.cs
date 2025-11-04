@@ -11,10 +11,10 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly ImageCompressor.Library.ImageCompressor _imageCompressor;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ImageCompressor.Library.ImageCompressor imageCompressor)
     {
         _logger = logger;
-        _imageCompressor = new ImageCompressor.Library.ImageCompressor();
+        _imageCompressor = imageCompressor;
     }
 
     public IActionResult Index()
