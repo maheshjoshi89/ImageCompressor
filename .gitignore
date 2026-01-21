@@ -10,3 +10,6 @@
 /.vs/ProjectEvaluation
 /ImageCompressor.Api/bin/Debug/net9.0
 /ImageCompressor.Api/obj
+/ImageCompressor.Library.Tests/bin/Debug/net9.0
+/.vs/CopilotSnapshots/E3EBBC5E9225524D81401D170177025E
+/ImageCompressor.Library.Tests/obj/Debug/net9.0/ImageCompressor.Library.Tests.AssemblyInfo.cs
