@@ -37,7 +37,7 @@ namespace ImageCompressor.Api.Controllers
 
     public class CompressionRequest
     {
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
         public int Width { get; set; } = 1024;
         public int Quality { get; set; } = 80;
         public string Format { get; set; } = "webp";

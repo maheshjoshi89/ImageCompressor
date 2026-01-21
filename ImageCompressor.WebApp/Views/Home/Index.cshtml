@@ -1,4 +1,5 @@
 
+
 @{
     ViewData["Title"] = "Image Compressor";
 }
@@ -15,11 +16,42 @@
                 <h4 class="mb-0">Compress Image</h4>
             </div>
             <div class="card-body">
-                <form asp-action="Compress" method="post">
-                    <div class="form-group mb-3">
-                        <label for="imageUrl" class="form-label">Image URL</label>
-                        <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg" required>
+                @if (ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div class="alert alert-danger">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p class="mb-0">@error.ErrorMessage</p>
+                        }
                     </div>
+                }
+                <form asp-action="Compress" method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Image Source</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="imageSource" id="sourceUrl" value="url" checked onclick="toggleImageSource()">
+                            <label class="form-check-label" for="sourceUrl">
+                                Image URL
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="imageSource" id="sourceFile" value="file" onclick="toggleImageSource()">
+                            <label class="form-check-label" for="sourceFile">
+                                Upload Local File
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3" id="urlSection">
+                        <label for="imageUrl" class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="e.g., https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-group mb-3" id="fileSection" style="display: none;">
+                        <label for="imageFile" class="form-label">Select Image File</label>
+                        <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*">
+                    </div>
+
                     <div class="form-group mb-3">
                         <label for="width" class="form-label">Width (pixels)</label>
                         <input type="number" class="form-control" id="width" name="width" value="1024" min="1" required>
@@ -43,3 +75,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleImageSource() {
+        var urlSection = document.getElementById('urlSection');
+        var fileSection = document.getElementById('fileSection');
+        var urlInput = document.getElementById('imageUrl');
+        var fileInput = document.getElementById('imageFile');
+        
+        if (document.getElementById('sourceUrl').checked) {
+            urlSection.style.display = 'block';
+            fileSection.style.display = 'none';
+            fileInput.value = '';
+        } else {
+            urlSection.style.display = 'none';
+            fileSection.style.display = 'block';
+            urlInput.value = '';
+        }
+    }
+</script>
+

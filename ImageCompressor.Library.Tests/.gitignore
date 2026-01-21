@@ -1,0 +1,14 @@
+# Ignore build artifacts for the test project
+obj/
+# Optional: ignore compiled outputs too
+bin/
+/.vs/ImageCompressor
+/ImageCompressor.Library/bin/Debug/net9.0
+/ImageCompressor.Library/obj
+/ImageCompressor.WebApp/bin/Debug/net9.0
+/ImageCompressor.WebApp/obj
+/.vs/ProjectEvaluation
+/ImageCompressor.Api/bin/Debug/net9.0
+/ImageCompressor.Api/obj
+/ImageCompressor.Library.Tests/bin/Debug/net9.0
+/.vs/CopilotSnapshots/E3EBBC5E9225524D81401D170177025E

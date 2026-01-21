@@ -33,7 +33,7 @@ namespace ImageCompressor.Library.Tests
                 .ReturnsAsync(response);
 
             var httpClient = new HttpClient(mockHttpMessageHandler.Object);
-            var imageCompressor = new ImageCompressor.Library.ImageCompressor(httpClient);
+            var imageCompressor = new ImageCompressor(httpClient);
 
             // Act
             var result = await imageCompressor.CompressImageAsync("https://example.com/image.png", 100, 80, "webp");
@@ -63,10 +63,10 @@ namespace ImageCompressor.Library.Tests
                 .ReturnsAsync(response);
 
             var httpClient = new HttpClient(mockHttpMessageHandler.Object);
-            var imageCompressor = new ImageCompressor.Library.ImageCompressor(httpClient);
+            var imageCompressor = new ImageCompressor(httpClient);
 
             // Act & Assert
-            await Assert.ThrowsExceptionAsync<ArgumentException>(() => imageCompressor.CompressImageAsync("https://example.com/image.png", 100, 80, "bmp"));
+            await Assert.ThrowsAsync<ArgumentException>(() => imageCompressor.CompressImageAsync("https://example.com/image.png", 100, 80, "bmp"));
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace ImageCompressor.Library.Tests
                 .ReturnsAsync(response);
 
             var httpClient = new HttpClient(mockHttpMessageHandler.Object);
-            var imageCompressor = new ImageCompressor.Library.ImageCompressor(httpClient);
+            var imageCompressor = new ImageCompressor(httpClient);
 
             // Act
             var result = await imageCompressor.CompressImageAsync("https://example.com/image.png", 100, 80, "webp");
@@ -119,7 +119,7 @@ namespace ImageCompressor.Library.Tests
                 .ReturnsAsync(response);
 
             var httpClient = new HttpClient(mockHttpMessageHandler.Object);
-            var imageCompressor = new ImageCompressor.Library.ImageCompressor(httpClient);
+            var imageCompressor = new ImageCompressor(httpClient);
 
             // Act
             var result = await imageCompressor.CompressImageAsync("https://example.com/image.png", 100, 80, "webp");

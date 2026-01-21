@@ -21,7 +21,19 @@ namespace ImageCompressor.Library
             try
             {
                 var imageBytes = await _httpClient.GetByteArrayAsync(imageUrl);
+                return CompressImageFromBytes(imageBytes, width, quality, format);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return null;
+            }
+        }
 
+        public byte[] CompressImageFromBytes(byte[] imageBytes, int width, int quality, string format)
+        {
+            try
+            {
                 using (var image = new MagickImage(imageBytes))
                 {
                     var size = new MagickGeometry((uint)width, 0);
@@ -46,7 +58,6 @@ namespace ImageCompressor.Library
             }
             catch (Exception ex)
             {
-                // Handle exceptions (e.g., logging)
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 return null;
             }

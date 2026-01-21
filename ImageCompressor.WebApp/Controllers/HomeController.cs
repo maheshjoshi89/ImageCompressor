@@ -23,18 +23,35 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Compress(string imageUrl, int width, int quality, string format)
+    public async Task<IActionResult> Compress(string imageUrl, IFormFile imageFile, int width, int quality, string format)
     {
-        if (string.IsNullOrEmpty(imageUrl))
+        byte[] compressedImage = null;
+
+        // Handle file upload
+        if (imageFile != null && imageFile.Length > 0)
         {
+            using (var memoryStream = new MemoryStream())
+            {
+                await imageFile.CopyToAsync(memoryStream);
+                var imageBytes = memoryStream.ToArray();
+                compressedImage = _imageCompressor.CompressImageFromBytes(imageBytes, width, quality, format);
+            }
+        }
+        // Handle URL
+        else if (!string.IsNullOrEmpty(imageUrl))
+        {
+            compressedImage = await _imageCompressor.CompressImageAsync(imageUrl, width, quality, format);
+        }
+        else
+        {
+            ModelState.AddModelError("", "Please provide either an image URL or upload a file.");
             return View("Index");
         }
 
-        var compressedImage = await _imageCompressor.CompressImageAsync(imageUrl, width, quality, format);
-
         if (compressedImage == null)
         {
-            return View("Error");
+            ModelState.AddModelError("", "Image compression failed. Please try again.");
+            return View("Index");
         }
 
         return File(compressedImage, $"image/{format}", $"compressed.{format}");
